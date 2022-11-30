@@ -102,17 +102,52 @@ namespace Simplex
 
             return ret;
         }
-    }
-    class Program
-    {
-        static bool ShouldContinue(SimplexObject t)
+
+        /// <summary>
+        /// check if there exists an answer of positive value
+        /// </summary>
+        public bool ShouldContinue()
         {
-            for (int i = 0; i < t.width; i++)
+            for (int i = 0; i < this.width; i++)
             {
-                if (t[i, t.height - 1] > 0) return true;
+                if (this[i, this.height - 1] > 0) return true;
             }
             return false;
         }
+
+        /// <summary>
+        /// 1. get pivot column, 2. get pivot row, 3. divide elements of pivot row by pivot number, 4. watch the code. Kind of hard to explain in a one liner.
+        /// </summary>
+        public void Iterate()
+        {
+            int pivotX = this.GetPivotX();
+            int pivotY = this.GetPivotY(pivotX);
+
+            //étape 3
+            double pivotN = this[pivotX, pivotY];
+            for (int i = 0; i < this.width; i++)
+            {
+                this[i, pivotY] /= pivotN;
+            }
+
+            //étape 4
+            for (int j = 0; j < this.height; j++)
+            {
+                if (j == pivotY) continue;
+
+                double m = this[pivotX, j];
+                for (int i = 0; i < this.width; i++)
+                {
+
+                    this[i, j] -= m * this[i, pivotY];
+                }
+            }
+        }
+
+    }
+    class Program
+    {
+        
         static void Main(string[] args)
         {
             var tab = new SimplexObject(2, 2);
@@ -123,9 +158,9 @@ namespace Simplex
             Console.WriteLine(tab);
             Console.ReadKey(true);
 
-            while (ShouldContinue(tab))
+            while (tab.ShouldContinue())
             {
-                Iterate(tab);
+                tab.Iterate();
                 Console.WriteLine(tab);
                 Console.ReadKey(true);
             }
@@ -139,31 +174,7 @@ namespace Simplex
         }
         
         
-        static void Iterate(SimplexObject tab)
-        {
-            int pivotX = tab.GetPivotX();
-            int pivotY = tab.GetPivotY(pivotX);
-           
-            //étape 3
-            double pivotN = tab[pivotX, pivotY];
-            for (int i = 0; i < tab.width; i++)
-            {
-                tab[i, pivotY] /= pivotN;
-            }
-
-            //étape 4
-            for (int j = 0; j < tab.height; j++)
-            {
-                if (j == pivotY) continue;
-
-                double m = tab[pivotX, j];
-                for (int i = 0; i < tab.width; i++)
-                {
-
-                    tab[i, j] -= m * tab[i, pivotY];
-                }
-            }
-        }
+        
     }
 
 }
