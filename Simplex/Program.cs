@@ -165,10 +165,6 @@ namespace Simplex
                 Console.ReadKey(true);
             }
 
-
-            Console.WriteLine(tab);
-            Console.ReadKey(true);
-
             Console.WriteLine("la réponse est : " + (-tab[tab.width - 1, tab.height - 1]));
             Console.ReadKey(true);
         }
