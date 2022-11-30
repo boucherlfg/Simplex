@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AF8AB304-8B5A-4BD7-BFD7-BC786BE25252}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SImplex</RootNamespace>
-    <AssemblyName>SImplex</AssemblyName>
+    <RootNamespace>Simplex</RootNamespace>
+    <AssemblyName>Simplex</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
